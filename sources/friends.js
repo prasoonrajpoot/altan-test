@@ -9,25 +9,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get("/", async function(req, res){
+    console.log("user")
     var data = req.body;
     console.log(data);
     var b = await Users.find({userName : data.username});
     console.log(b);
     if(b.length == 0){
-        var user = new Users({
-            userName : data.username,
-            friends : [],
-            requests : [],
-        });
-        await user.save();
-        res.status(200).send("user created");
+      res.status(404).send("user not found");
     }else{
-        console.log("did not save");
-        res.status(400).send({
-            "error" : "error",
-            "explaination" : "explaination",
-        })
+        console.log("sending ");
+        console.log(b[0].friends);
+        res.status(202).send({"friends": b[0].friends});
     }
+
+
 })
 
 module.exports = app

@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 var connectDB = require("./sources/connectDB");
 var createFile = require("./sources/create");
 var addFile = require("./sources/add");
-
+var friendsFile = require("./sources/friends");
 var app = express();
 connectDB();
 
@@ -20,6 +20,7 @@ app.get("/", function(req, res){
 
 app.use("/create", createFile);
 app.use("/add", addFile);
+app.use("/friends", friendsFile);
 
 
 
