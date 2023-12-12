@@ -15,10 +15,19 @@ app.get("/", async function(req, res){
     var b = await Users.find({userName : data.username});
     console.log(b);
     if(b.length == 0){
-      res.status(404).send("user not found");
+      res.status(400).send({
+           "status" : "failure",
+           "reason" : "explanation",
+        })
     }else{
         console.log("sending ");
         console.log(b[0].friends);
+        if(b[0].friends.length == 0){
+          res.status(404).send({
+            "status" : "failure",
+            "reason" : "explanation",
+          })
+        }
         res.status(202).send({"friends": b[0].friends});
     }
 

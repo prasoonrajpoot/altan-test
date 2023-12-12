@@ -20,12 +20,12 @@ app.get("/", async function(req, res){
             requests : [],
         });
         await user.save();
-        res.status(200).send("user created");
+        res.status(201).send({"username": ""});
     }else{
         console.log("did not save");
         res.status(400).send({
-            "error" : "error",
-            "explaination" : "explaination",
+           "status" : "failure",
+           "reason" : "explanation",
         })
     }
 })

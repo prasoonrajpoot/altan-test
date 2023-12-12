@@ -22,8 +22,8 @@ app.get("/:userA/:userB", async function(req, res){
     console.log(userA, userB);
     if(userA == null || userB == null){
         res.status(400).send({
-            "error" : "error",
-            "explaination" : "explaination",
+            "status" : "failure",
+            "reason" : "explanation",
         })
         return;
     }
@@ -38,7 +38,7 @@ app.get("/:userA/:userB", async function(req, res){
             await userA.save();
             await userB.save();
             res.status(200).send({
-                status : "success",
+                "status" : "success",
             })
             return;
 
@@ -48,8 +48,8 @@ app.get("/:userA/:userB", async function(req, res){
     for(var i = 0; i < arrayB.length; i++){
         if(arrayB[i] == a){
             res.status(400).send({
-                "error" : "error",
-                "explaination" : "explaination",
+                "status" : "failure",
+                "reason" : "explanation",
             })
         }
     }
@@ -57,7 +57,7 @@ app.get("/:userA/:userB", async function(req, res){
     arrayB.push(a);
     userB.requests = arrayB;
     await userB.save();  
-    res.status(200).send({
+    res.status(202).send({
         status : "success",
     })  
 
